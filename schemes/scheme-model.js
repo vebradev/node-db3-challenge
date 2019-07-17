@@ -31,7 +31,11 @@ function findSteps(idOfScheme) {
     .where("scheme_id", idOfScheme);
 }
 
-function add() {}
+function add(scheme) {
+  return db("schemes")
+    .insert(scheme)
+    .then(([id]) => this.findById(id));
+}
 
 function update() {}
 
