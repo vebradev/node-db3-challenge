@@ -1,5 +1,5 @@
-const knex = require('knex');
-const db = knex(require('../knexfile').development);
+const knex = require("knex");
+const db = knex(require("../knexfile").development);
 
 module.exports = {
   find,
@@ -8,28 +8,31 @@ module.exports = {
   add,
   update,
   remove
-}
+};
 
 function find() {
-  return "qq";
+  return db("schemes");
 }
 
-function findById() {
-
+function findById(id) {
+  return db("schemes").where({ id });
 }
 
-function findSteps() {
-
+function findSteps(id) {
+  return db("schemes")
+    .join("steps", "schemes.id", "steps.id")
+    .where({ id });
 }
 
-function add() {
-
+function findSteps(idOfScheme) {
+  return db("steps")
+    .join("schemes", "schemes.id", "scheme_id")
+    .select("steps.id", "schemes.scheme_name", "steps.step_number", "steps.instructions")
+    .where("scheme_id", idOfScheme);
 }
 
-function update() {
+function add() {}
 
-}
+function update() {}
 
-function remove() {
-  
-}
+function remove() {}
