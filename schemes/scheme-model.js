@@ -37,6 +37,15 @@ function add(scheme) {
     .then(([id]) => this.findById(id));
 }
 
-function update() {}
+function update(changes, id) {
+  return db("schemes")
+    .where({ id })
+    .update(changes)
+    .then(status => (status > 0 ? this.findById(id) : null));
+}
 
-function remove() {}
+function remove(id) {
+  return db("schemes")
+    .where({ id })
+    .del();
+}
